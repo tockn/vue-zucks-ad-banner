@@ -1,6 +1,6 @@
 {
   "name": "vue-zucks-ad-banner",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "private": false,
   "main": "dist/zucks-ad-banner.common.js",
   "unpkg": "./dist/zucks-ad-banner-common.js",

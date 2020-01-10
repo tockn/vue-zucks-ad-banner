@@ -30,7 +30,7 @@ import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
 import axios from 'axios';
 
 @Component
-export default class HelloWorld extends Vue {
+export default class VueZucksAdBanner extends Vue {
   @Prop() private frameId!: string;
 
   private adResponse = {} as IResponse;

@@ -1,23 +1,7 @@
-import component from './components/ZucksAdBanner';
+import  VueZucksAdBanner  from './components/VueZucksAdBanner'
 
-export function install(Vue) {
-  if (install.installed) return;
-  install.installed = true;
-  Vue.component('zucks-ad-banner', component);
-}
-
-const plugin = {
-  install,
+VueZucksAdBanner.install = function (Vue) {
+  Vue.component('zucks-ad-banner', VueZucksAdBanner)
 };
 
-let GlobalVue = null;
-if (typeof window !== 'undefined') {
-  GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
-  GlobalVue = global.Vue;
-}
-if (GlobalVue) {
-  GlobalVue.use(plugin);
-}
-
-export default component;
+export default VueZucksAdBanner;
