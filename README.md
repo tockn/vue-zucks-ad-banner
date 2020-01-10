@@ -1,4 +1,4 @@
-# vue-zucks-ad-banner
+# vue-zucks-ad-banner (非公式)
 
 ## これは何？
 
