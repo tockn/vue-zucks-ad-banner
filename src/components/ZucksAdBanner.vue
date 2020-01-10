@@ -26,55 +26,57 @@
 </template>
 
 <script lang="ts">
-  import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
-  import axios from 'axios'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
+import axios from 'axios';
 
-  @Component
-  export default class HelloWorld extends Vue {
-    @Prop() private frameId!: string;
-    @Emit() private click(){}
+@Component
+export default class HelloWorld extends Vue {
+  @Prop() private frameId!: string;
 
-    private adResponse: IResponse;
-    private loaded = false;
-    private infoClicked = false;
-    private viewed = false;
+  private adResponse = {} as IResponse;
+  private loaded = false;
+  private infoClicked = false;
+  private viewed = false;
+  @Emit()
+  /* tslint:disable:no-empty */
+  private click() {}
 
-    private async created () {
-      const rnd = Math.floor(1E9 * Math.random());
-      const s = screen || { width: 0, height: 0 };
-      const sw = s.width;
-      const sh = s.height;
-      const touch = 'ontouchstart' in window ? '1' : '0';
-      const res = await axios.get(`https://sh.zucks.net/opt/json/api/v2?f=${this.frameId}&rnd=${rnd}&sw=${sw}&sh=${sh}&touch=${touch}`);
-      this.adResponse = res.data as IResponse;
-      this.loaded = true
-    }
-
-    private mounted() {
-      const zucksInfoDiv = this.$refs.zucksInfoDiv as HTMLElement;
-      const zucksInfoA = this.$refs.zucksInfoA as HTMLElement;
-      let e = () => {
-        zucksInfoDiv.removeEventListener("click", e);
-        this.infoClicked ? zucksInfoDiv.style.width = "17px" : (zucksInfoDiv.style.webkitTransitionProperty = "width",
-          zucksInfoDiv.style.webkitTransitionDuration = "0.5s",
-          zucksInfoDiv.style.width = "85px")
-      };
-      zucksInfoDiv.addEventListener("click", e);
-      zucksInfoDiv.addEventListener("webkitTransitionEnd", () => {
-        zucksInfoA.style.display = this.infoClicked ? "none" : "block";
-        this.infoClicked = !this.infoClicked;
-        zucksInfoDiv.addEventListener("click", e)
-      });
-
-      const observer = new IntersectionObserver(() => {
-        if (!this.viewed && this.loaded) {
-          axios.get(this.adResponse.vi);
-          this.viewed = true
-        }
-      });
-      observer.observe(this.$refs.zucksAd as HTMLElement)
-    }
+  private async created() {
+    const rnd = Math.floor(1E9 * Math.random());
+    const s = screen || { width: 0, height: 0 };
+    const sw = s.width;
+    const sh = s.height;
+    const touch = 'ontouchstart' in window ? '1' : '0';
+    const res = await axios.get(`https://sh.zucks.net/opt/json/api/v2?f=${this.frameId}&rnd=${rnd}&sw=${sw}&sh=${sh}&touch=${touch}`);
+    this.adResponse = res.data as IResponse;
+    this.loaded = true;
   }
+
+  private mounted() {
+    const zucksInfoDiv = this.$refs.zucksInfoDiv as HTMLElement;
+    const zucksInfoA = this.$refs.zucksInfoA as HTMLElement;
+    const e = () => {
+      zucksInfoDiv.removeEventListener('click', e);
+      this.infoClicked ? zucksInfoDiv.style.width = '17px' : (zucksInfoDiv.style.webkitTransitionProperty = 'width',
+        zucksInfoDiv.style.webkitTransitionDuration = '0.5s',
+        zucksInfoDiv.style.width = '85px');
+    };
+    zucksInfoDiv.addEventListener('click', e);
+    zucksInfoDiv.addEventListener('webkitTransitionEnd', () => {
+      zucksInfoA.style.display = this.infoClicked ? 'none' : 'block';
+      this.infoClicked = !this.infoClicked;
+      zucksInfoDiv.addEventListener('click', e);
+    });
+
+    const observer = new IntersectionObserver(() => {
+      if (!this.viewed && this.loaded) {
+        axios.get(this.adResponse.vi);
+        this.viewed = true;
+      }
+    });
+    observer.observe(this.$refs.zucksAd as HTMLElement);
+  }
+}
 </script>
 
 <style scoped>

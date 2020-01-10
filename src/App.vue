@@ -1,29 +1,22 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <zucks-ad-banner frame-id="442144" @click="clicked"/>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+<script>
+  import ZucksAdBanner from './components/ZucksAdBanner'
 
-@Component({
+export default {
+  name: 'App',
   components: {
-    HelloWorld,
+    'zucks-ad-banner': ZucksAdBanner
   },
-})
-export default class App extends Vue {}
+  methods: {
+    clicked () {
+      console.log('clicked')
+    }
+  }
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

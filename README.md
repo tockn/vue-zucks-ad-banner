@@ -1,29 +1,14 @@
 # vue-zucks-ad-banner
 
-## Project setup
-```
-npm install
-```
+## これは何？
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+これはVue.jsで[Zucks Ad Network](https://zucks.co.jp/publisher/adnetwork/)のWebバナー広告を表示するためのVueコンポーネントです。  
+**非公式です**(規約的にNGでしたらすぐに消します)。  
 
-### Compiles and minifies for production
-```
-npm run build
-```
+公式から提供されるHTMLタグ（scriptタグ）はVueのコンポーネントでは扱えないため作成しました。
 
-### Run your tests
-```
-npm run test
-```
+## 使い方
 
-### Lints and fixes files
-```
-npm run lint
-```
+```vue
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
